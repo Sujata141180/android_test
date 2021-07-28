@@ -40,18 +40,18 @@ commands:
   bundle-dependencies:
     description: "Get bundle dependencies"
     steps:
-      - restore_cache:
-          name: Restore Fastlane cache
-          key: v1-gems-{{ checksum "Gemfile.lock" }}-{{ arch }}
+     # - restore_cache:
+        #  name: Restore Fastlane cache
+          #key: v1-gems-{{ checksum "Gemfile.lock" }}-{{ arch }}
       - run:
           working_directory: .
           name: Download Fastlane dependencies
           command: bundle install --path ./vendor/bundle
-      - save_cache:
-          name: Save Fastlane cache
-          key: v1-gems-{{ checksum "Gemfile.lock" }}-{{ arch }}
-          paths:
-            - ./vendor/bundle
+      #- save_cache:
+       #   name: Save Fastlane cache
+        #  key: v1-gems-{{ checksum "Gemfile.lock" }}-{{ arch }}
+         # paths:
+          #  - ./vendor/bundle
 
   pods-dependencies:
     description: "Get cocoapods dependencies"
@@ -168,9 +168,9 @@ jobs:
           at: .
       - checkout
       - node-version
-      - bundle-dependencies
+      #- bundle-dependencies
       - npm-dependencies
-      - react-native-dependencies
+      #- react-native-dependencies
       - gradle-dependencies
       - android-sdk-dependencies
       - create-launch-android-emulator
@@ -235,4 +235,4 @@ workflows:
   run_detox_tests:
     jobs:
       - android-test
-      - ios-test
+      #- ios-test
